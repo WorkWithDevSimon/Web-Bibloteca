@@ -1,13 +1,14 @@
-from urllib import response
 from api.serializer import LibroSerializer
 from api.models import Libro
-from django.shortcuts import render
-from rest_framework import APIview
+from rest_framework.views import APIView
 
-class LibrosView(APIview):
-    def get(self):
+from rest_framework.response import Response
+
+
+class LibrosView(APIView):
+    def get(self,request):
         libros = Libro.objects.all()
         serializer = LibroSerializer(libros, many=True)
-        return response(serializer.data)
+        return Response(serializer.data)
     
     

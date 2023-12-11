@@ -5,7 +5,6 @@ class LibroSerializer(serializers.Serializer):
     class Meta:
         model = Libro
         field = '__all__'
-
 class SocioSerializer(serializers.Serializer):
     class Meta:
         model = Socio
