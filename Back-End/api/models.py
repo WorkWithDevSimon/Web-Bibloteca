@@ -6,7 +6,6 @@ class Libro(models.Model):
 
     def __str__(self) -> str:
         return self.titulo
-
 class Socio(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)

@@ -121,7 +121,7 @@ class ReservasViewId(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 
-class SociosView(APIView):
+class EstadosView(APIView):
     def get(self, request):
         estado = Estado.objects.all()
         serializer = EstadoSerializer(estado, many=True)
