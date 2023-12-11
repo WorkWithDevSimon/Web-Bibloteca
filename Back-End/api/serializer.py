@@ -1,4 +1,4 @@
-from api.models import Estado, Libro, Reserva, Socio
+from api.models import Estado, Libro, Reserva, Socio, Token
 from rest_framework import serializers
 from datetime import datetime
 
@@ -45,4 +45,9 @@ class ReservaSerializer(serializers.ModelSerializer):
 class EstadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estado
+        fields = '__all__'
+
+class TokenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Token
         fields = '__all__'
