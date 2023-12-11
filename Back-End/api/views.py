@@ -2,11 +2,11 @@ from rest_framework.response import Response
 from api.serializer import EstadoSerializer, LibroSerializer, ReservaSerializer, SocioSerializer
 from api.models import Estado, Libro, Reserva, Socio
 from django.shortcuts import render
-from rest_framework.views import APIview
+from rest_framework.views import APIView
 from rest_framework import status
 from django.http import Http404
 
-class SociosView(APIview):
+class SociosView(APIView):
     def get(self, request):
         libros = Libro.objects.all()
         serializer = LibroSerializer(libros, many=True)
@@ -19,7 +19,7 @@ class SociosView(APIview):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
     
-class LibrosViewId(APIview):
+class LibrosViewId(APIView):
     def get_object(self,pk):
         try:
             Libro.objects.get(pk)
@@ -44,7 +44,7 @@ class LibrosViewId(APIview):
         libro.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-class SociosView(APIview):
+class SociosView(APIView):
     def get(self, request):
         socio = Socio.objects.all()
         serializer = LibroSerializer(socio, many=True)
@@ -57,7 +57,7 @@ class SociosView(APIview):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
     
-class SociosViewId(APIview):
+class SociosViewId(APIView):
     def get_object(self,pk):
         try:
             Socio.objects.get(pk)
@@ -82,7 +82,7 @@ class SociosViewId(APIview):
         socio.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-class ReservasView(APIview):
+class ReservasView(APIView):
     def get(self, request):
         reserva = Reserva.objects.all()
         serializer = ReservaSerializer(reserva, many=True)
@@ -95,7 +95,7 @@ class ReservasView(APIview):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
     
-class ReservasViewId(APIview):
+class ReservasViewId(APIView):
     def get_object(self,pk):
         try:
             Reserva.objects.get(pk)
@@ -121,7 +121,7 @@ class ReservasViewId(APIview):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 
-class SociosView(APIview):
+class SociosView(APIView):
     def get(self, request):
         estado = Estado.objects.all()
         serializer = EstadoSerializer(estado, many=True)
@@ -134,7 +134,7 @@ class SociosView(APIview):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
     
-class EstadosViewId(APIview):
+class EstadosViewId(APIView):
     def get_object(self,pk):
         try:
             Estado.objects.get(pk)
