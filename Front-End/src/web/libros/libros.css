@@ -1,0 +1,11 @@
+.BotonVer{
+    background-color: black;
+    color: aliceblue;
+    margin: 20px;
+}
+.BotonVer:hover{
+    background-color: rgb(255, 0, 0);
+    color: aliceblue;
+    margin: 20px;
+}
+
