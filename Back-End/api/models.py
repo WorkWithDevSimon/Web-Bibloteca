@@ -1,24 +1,37 @@
 from django.db import models
 
+
 class Libro(models.Model):
     titulo = models.CharField(max_length=50)
-    disponible = models.BooleanField(default=True) 
+    autor = models.CharField(max_length=50)
+    editorial = models.CharField(max_length=50)
+    coleccion = models.CharField(max_length=50)
+    año = models.CharField(max_length=10)
+    paginas = models.CharField(max_length=10)
+    imagenURL = models.CharField(max_length=200)
+    disponible = models.BooleanField(default=True)
 
     def __str__(self) -> str:
         return self.titulo
-    
+
+
 class Socio(models.Model):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
+    usuario = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
 
     def __str__(self) -> str:
         return f"{self.nombre} {self.apellido}"
+
 
 class Estado(models.Model):
     nombre = models.CharField(max_length=50)
 
     def __str__(self) -> str:
         return self.nombre
+
 
 class Reserva(models.Model):
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE)

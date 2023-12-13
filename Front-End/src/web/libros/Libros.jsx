@@ -1,22 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { DatosLibros } from "../../api/apisTraidas";
-import "./libros.css"
-const Libros = () => {
-    const VerDatos = async () => {
-        const respuesta = (await DatosLibros()).data;
-        console.log(respuesta);
-    }
-    useEffect(() => {
-        VerDatos();
-    }, []);
+import LibroLis from '../../components/componenteLibros/LibroLis';
+import LibroEncabezado from '../../components/componenteLibros/LibroEncabezado';
 
+const Libros = () => {
+    const [CapturarLibros, setCapturarLibros] = useState([])    
     return (
         <>
-            <div>Hola este es el apartado de libros</div>
-            <div>
-                <button className='BotonVer' onClick={VerDatos}>Traer Datos</button>
-            </div>
+            <LibroLis DatosLibros={DatosLibros} setCapturarLibros={setCapturarLibros} />
+            <LibroEncabezado CapturarLibros={CapturarLibros} />
         </>
     )
 }
 export default Libros
+

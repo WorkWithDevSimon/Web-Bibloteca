@@ -1,0 +1,15 @@
+/* inicio.css */
+
+.imagenDeIncio {
+    max-width: 100%; /* Ajusta el ancho máximo de la imagen al 100% del contenedor */
+    height: auto; /* Asegura que la altura se ajuste automáticamente para mantener la proporción original */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .imagenDeIncio img {
+    width: 100%; /* Hace que la imagen ocupe el 100% del contenedor */
+    height: auto; /* Asegura que la altura se ajuste automáticamente para mantener la proporción original */
+  }
+   

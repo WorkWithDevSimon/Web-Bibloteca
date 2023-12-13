@@ -1,0 +1,168 @@
+/* Estilos para la barra de navegación */
+.navegador {
+    position: sticky;
+    /* Fija la barra de navegación en la parte superior de la ventana */
+    top: 0;
+    /* Alinea la barra de navegación en la parte superior */
+    left: 0;
+    /* Alinea la barra de navegación en la izquierda */
+    right: 0;
+    /* Alinea la barra de navegación en la derecha */
+    display: flex;
+    /* Usa un modelo de caja flexible para el diseño */
+    justify-content: space-between;
+    /* Distribuye el espacio horizontalmente */
+    align-items: center;
+    /* Alinea elementos verticalmente en el centro */
+    padding: 3% 3rem;
+    /* Espaciado interno de 2% en la parte superior e inferior y 6rem en los lados */
+    background: radial-gradient(circle at 0% 100%, rgba(0, 0, 0, 1) 0%, rgba(4, 12, 24, 1) 100%);
+    /* background: var(--color-text); */
+    /* Fondo con degradado radial */
+    z-index: 999;
+    min-width: 200px;
+    /* Establece un ancho mínimo de 200px */
+    width: 100%;
+    /* Asegura que la barra ocupe todo el ancho disponible */
+}
+
+/* Contenedor de los enlaces en la barra de navegación */
+.navegador-links {
+    flex: 1;
+    /* Ocupa el espacio disponible en la barra de navegación */
+    display: flex;
+    /* Usa un modelo de caja flexible para el diseño */
+    justify-content: flex-start;
+    /* Justifica los elementos al principio horizontalmente */
+    align-items: center;
+    /* Alinea elementos verticalmente en el centro */
+}
+
+/* Logo en la barra de navegación */
+.navegador-links_logo {
+    margin-right: 2rem;
+    /* Margen derecho de 2rem */
+}
+
+/* Estilos para la imagen del logo */
+.navegador-links_logo img {
+    width: 150px;
+    /* Ancho de la imagen del logo */
+    height: 150px;
+    /* Altura de la imagen del logo */
+}
+
+/* Contenedor de enlaces en la barra de navegación */
+.navegador-links_container {
+    display: flex;
+    /* Usa un modelo de caja flexible para el diseño */
+    flex-direction: row;
+    /* Dirección de fila para los elementos */
+
+
+}
+
+/* Contenedor de inicio de sesión en la barra de navegación */
+.navegador-sign {
+    display: flex;
+    /* Usa un modelo de caja flexible para el diseño */
+    justify-content: flex-end;
+    /* Justifica los elementos al final horizontalmente */
+    align-items: center;
+    /* Alinea elementos verticalmente en el centro */
+}
+
+/* Estilos para los enlaces <a> y botones en la barra de navegación */
+.navegador-links_container a,
+.navegador-sign a,
+.navegador-menu_container a,
+.navegador-menu-buttons button,
+.navegador-menu_contenedor-links-sign button {
+    color: #fff;
+    /* Color del texto en blanco */
+    font-family: var(--font-family);
+    /* Utiliza la fuente definida en la variable --font-family */
+    font-weight: 500;
+    /* Peso de fuente 500 (mediano) */
+    font-size: 17px;
+    /* Tamaño de fuente de 18px */
+    line-height: 25px;
+    /* Altura de línea de 25px */
+    text-transform: capitalize;
+    /* Capitaliza el texto */
+    margin: 0 1rem;
+    /* Margen en los lados izquierdo y derecho */
+    cursor: pointer;
+    /* Cambia el cursor al puntero */
+    text-decoration: none;
+    /* Sin subrayado en los enlaces */
+    /* Cambia solo el color del texto al pasar el mouse */
+    transition: color 0.3s;
+    /* Transición suave para cambios de color del texto */
+}
+
+/* Cambia el color del texto al pasar el mouse */
+.navegador-links_container a:hover,
+.navegador-sign a:hover,
+.navegador-menu_container a:hover {
+    color: #FF4820;
+    /* Cambia el color del texto a #FF4820 al pasar el mouse */
+}
+
+/* Estilos para la imagen del logo en la barra de navegación */
+.navegador-links_logo img {
+    width: 100px;
+    /* Ancho de la imagen del logo */
+    height: 100px;
+    /* Altura de la imagen del logo */
+}
+
+/* Contenedor de enlaces en la barra de navegación */
+.navegador-links_container {
+    display: flex;
+    /* Usa un modelo de caja flexible para el diseño */
+    flex-direction: row;
+    /* Dirección de fila para los elementos */
+}
+
+/* Estilos para los botones en la barra de navegación */
+.navegador-sign button,
+.navegador-menu_container button,
+.navegador-menu-buttons button {
+    padding: 0.5rem 1rem;
+    /* Relleno en el botón */
+    color: #fff;
+    /* Color del texto en blanco */
+    background: #FF4820;
+    /* Fondo en color #FF4820 */
+    font-family: var(--font-family);
+    /* Utiliza la fuente definida en la variable --font-family */
+    font-weight: 500;
+    /* Peso de fuente 500 (mediano) */
+    font-size: 15px;
+    /* Tamaño de fuente de 18px */
+    line-height: 25px;
+    /* Altura de línea de 25px */
+    border: none;
+    /* Sin borde */
+    outline: none;
+    /* Sin contorno */
+    cursor: pointer;
+    /* Cambia el cursor al puntero */
+    border-radius: 5px;
+    /* Borde redondeado de 5px */
+    margin-left: 0rem;
+    /* Margen izquierdo de 1.5rem */
+    border: 1px solid #FF4820; /* Añade la propiedad de borde con el color naranja */
+}
+/* Cambia el color del texto al pasar el mouse sobre los botones */
+.navegador-sign button:hover,
+.navegador-menu_container button:hover,
+.navegador-menu-buttons button:hover {
+    color: #fff;
+    background: #000000;
+    border: 0.1px solid #FF4820;
+    /* Añade la propiedad de borde con el color naranja al pasar el mouse */
+    /* ... (otros estilos) */
+
+}

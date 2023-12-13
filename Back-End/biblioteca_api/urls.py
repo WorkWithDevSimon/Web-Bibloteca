@@ -13,8 +13,8 @@ urlpatterns = [
     path("SociosId/<int:pk>",views.SociosViewId.as_view() ),
     # --------------------------------------------------------------------
     path("Reservas/",views.ReservasView.as_view() ),
-    path("Reservas/<int:pk>",views.ReservasViewId.as_view() ),
+    path("ReservasId/<int:pk>",views.ReservasViewId.as_view() ),
     # --------------------------------------------------------------------
-    path("EstadosView/",views.EstadosView.as_view() ),
-    path("EstadosViewId/<int:pk>",views.EstadosViewId.as_view() )
+    path("Estados/",views.EstadosView.as_view() ),
+    path("EstadosId/<int:pk>",views.EstadosViewId.as_view() )
  ]

@@ -1,0 +1,85 @@
+/* CrearCuenta.css */
+
+.background-radial-gradient {
+
+    background-image: radial-gradient(ellipse at center, #ffffff 0%, #ffffff 100%);
+    /* Efecto blanco y negro */
+}
+
+#radius-shape-1,
+#radius-shape-2 {
+    background: radial-gradient(rgb(0, 0, 0), black);
+    /* Efecto blanco y negro para las formas */
+}
+
+.bg-glass {
+    /* Elimina background-color */
+    backdrop-filter: grayscale(1) blur(10px);
+    /* Mantén el resto de las propiedades */
+}
+
+
+/* Resto de estilos... */
+/* CrearCuenta.css */
+
+.background-radial-gradient {
+    background-image: radial-gradient(ellipse at center, #ffffff 0%, #ffffff 100%);
+    /* Efecto blanco y negro */
+}
+
+
+
+.bg-glass {
+    backdrop-filter: grayscale(1) blur(10px);
+    /* Elimina background-color y ajusta otros estilos según sea necesario */
+}
+
+/* Establece el color del texto a blanco y negro */
+.text-white {
+    color: #fff !important;
+    /* Color blanco */
+}
+
+.text-black {
+    color: #000 !important;
+    /* Color negro */
+}
+
+.btnCrearCuenta {
+    padding: 0.5rem 1rem;
+    /* Relleno en el botón */
+    color: #fff;
+    /* Color del texto en blanco */
+    background: #FF4820;
+    /* Fondo en color #FF4820 */
+    font-family: var(--font-family);
+    /* Utiliza la fuente definida en la variable --font-family */
+    font-weight: 500;
+    /* Peso de fuente 500 (mediano) */
+    font-size: 15px;
+    /* Tamaño de fuente de 18px */
+    line-height: 25px;
+    /* Altura de línea de 25px */
+    border: none;
+    /* Sin borde */
+    outline: none;
+    /* Sin contorno */
+    cursor: pointer;
+    /* Cambia el cursor al puntero */
+    border-radius: 5px;
+    /* Borde redondeado de 5px */
+    margin-left: 0rem;
+    /* Margen izquierdo de 1.5rem */
+    border: 1px solid #FF4820;
+    /* Añade la propiedad de borde con el color naranja */
+    width: 50%;
+    text-align: center;
+}
+
+/* Resto de estilos... */
+
+.btnCrearCuenta:hover {
+    color: #fff;
+    background: #000000;
+    border: 0.1px solid #FF4820;
+}
