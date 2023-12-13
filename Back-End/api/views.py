@@ -1,16 +1,12 @@
 from rest_framework.response import Response
-from api.serializer import (
-    EstadoSerializer,
-    LibroSerializer,
-    ReservaSerializer,
-    SocioSerializer,
-)
-from api.models import Estado, Libro, Reserva, Socio
+from api.serializer import EstadoSerializer, LibroSerializer, ReservaSerializer, SocioSerializer, TokenSerializer
+from api.models import Estado, Libro, Reserva, Socio, Token
 from django.shortcuts import render
+from django.contrib.auth.hashers import make_password
 from rest_framework.views import APIView
 from rest_framework import status
 from django.http import Http404
-
+from secrets import token_urlsafe
 
 class LibrosView(APIView):
     def get(self, request):
@@ -61,6 +57,7 @@ class SociosView(APIView):
     def post(self, request):
         serializer = SocioSerializer(data=request.data)
         if serializer.is_valid():
+            serializer.data["password"] = make_password(serializer.data["password"])
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -169,3 +166,23 @@ class EstadosViewId(APIView):
         estado = self.get_object(pk)
         estado.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+def login(request):
+    socios = Socio.objects.all()
+    username = request.POST["username"]
+    password = request.POST["password"]
+    for socio in socios:
+        if username == socio.username and password == socio.password:
+            token = Token.objects.filter(socio = socio).first()
+            if token:
+                serializer = TokenSerializer(token)
+                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+            else:
+                token = Token(token=token_urlsafe(16), socio=socio)
+                serializer = TokenSerializer(token)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response({"error": "Usuario no Existe"}, status=status.HTTP_400_BAD_REQUEST)
+
+

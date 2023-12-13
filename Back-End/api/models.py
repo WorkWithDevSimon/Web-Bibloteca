@@ -16,11 +16,13 @@ class Libro(models.Model):
 
 
 class Socio(models.Model):
+    username = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     usuario = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
+    password = models.CharField(max_length=254)
 
     def __str__(self) -> str:
         return f"{self.nombre} {self.apellido}"
@@ -42,3 +44,7 @@ class Reserva(models.Model):
 
     def __str__(self) -> str:
         return f"{self.libro}, {self.fecha_inicio} a {self.fecha_devolucion}, Socio: {self.socio}, Estado: {self.estado}"
+
+class Token(models.Model):
+    token = models.CharField(max_length=22, unique=True, null=False)
+    socio = models.ForeignKey(Socio, on_delete=models.CASCADE, unique=True, null=False)
