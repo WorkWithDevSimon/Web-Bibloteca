@@ -35,12 +35,6 @@ const EstadosTraidas = axios.create({
 export const DatosEstado = () => EstadosTraidas.get("/");
 export const InsertarEstado = (dato) => EstadosTraidas.post("/", dato);
 // ------------------------------------------------------------------------------------------------------------
-const LoginValidacion = axios.create({
-    baseURL: ""
-})
-export const VerificarLogin = () => LibrosRecomendados.get("/");
-
-
 
 
 
