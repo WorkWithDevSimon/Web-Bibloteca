@@ -8,9 +8,12 @@ const LibroEncabezado = ({ CapturarLibros, ContadorLibros, SetContadorLibros, se
         setCapturarLibros(nuevaListaLibros);
         SetContadorLibros(((ContadorLibros) - 1));
     };
-    const comprarProducto = () => {
-        console.log("Estos son los libros:", CapturarLibros)
-    };
+    const comprarProducto = async() => {
+        for (let i = 0; i < CapturarLibros.length; i++) {
+            const producto = CapturarLibros[i];
+            alert(producto.id)
+        };
+    }
     return (
         <>
             <header id='HeaderComponente'>

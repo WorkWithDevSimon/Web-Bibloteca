@@ -14,9 +14,6 @@ const LibrosRecomendados = axios.create({
 export const DatosRecomendaciones = () => LibrosRecomendados.get("/")
 
 
-
-
-
 // ------------------------------------------------------------------------------------------------------------
 const SociosTraidos = axios.create({
     baseURL: "http://127.0.0.1:8000/Socios/"
