@@ -6,14 +6,10 @@ const LibrosTraidos = axios.create({
 });
 export const DatosLibros = () => LibrosTraidos.get("/");
 // ------------------------------------------------------------------------------------------------------------
-
 const LibrosRecomendados = axios.create({
-    baseUrl: "http://127.0.0.1:8000/libro_mas_popular/"
+    baseURL: "http://127.0.0.1:8000/libro_mas_popular/"
 })
-
-export const DatosRecomendaciones = () => LibrosRecomendados.get("/")
-
-
+export const DatosRecomendaciones = () => LibrosRecomendados.get("/");
 // ------------------------------------------------------------------------------------------------------------
 const SociosTraidos = axios.create({
     baseURL: "http://127.0.0.1:8000/Socios/"
@@ -32,6 +28,11 @@ const EstadosTraidas = axios.create({
 });
 export const DatosEstado = () => EstadosTraidas.get("/");
 export const InsertarEstado = (dato) => EstadosTraidas.post("/", dato);
+// ------------------------------------------------------------------------------------------------------------
+const LoginValidacion = axios.create({
+    baseURL: ""
+})
+export const VerificarLogin = () => LibrosRecomendados.get("/");
 
 
 
