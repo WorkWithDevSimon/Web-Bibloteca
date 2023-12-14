@@ -171,22 +171,23 @@ class EstadosViewId(APIView):
         estado.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+@api_view(('POST',))
 def login(request):
-    socios = Socio.objects.all()
-    username = request.POST["username"]
-    password = request.POST["password"]
-    for socio in socios:
-        if username == socio.username and check_password(password, socio.password):
-            token = Token.objects.filter(socio = socio).first()
+    username = request.data["usuario"]
+    password = request.data["password"]
+
+    filtro = Socio.objects.filter(usuario=username)
+    if filtro.exists():
+        socio = filtro.first()
+        if check_password(password, socio.password):
+            token = Token.objects.filter(socio = socio)
             if token:
                 serializer = TokenSerializer(token)
                 return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
             else:
                 token = Token(token=token_urlsafe(16), socio=socio)
                 serializer = TokenSerializer(token)
-                if serializer.is_valid():
-                    serializer.save()
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({"error": "Usuario no Existe"}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(('GET',))
@@ -198,7 +199,7 @@ def libro_mas_popular(request):
         if libro["num_reservas"] > maximo["num_reservas"]:
             maximo = libro
     if "libro" in maximo:
-        maximo["libro"] = Libro.objects.get(id=maximo["libro"]).titulo
+        maximo["libro"] = LibroSerializer(Libro.objects.get(id=maximo["libro"])).data
         return Response(maximo, status=status.HTTP_200_OK)
     else: return Response({"error": "No se encontraron registros"}, status=status.HTTP_400_BAD_REQUEST)
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './iniciarSession.css'; // Importa el archivo CSS con los estilos
+import { Logear } from "../../api/apisTraidas";
 
 const IniciarSesion = () => {
   const [datosIniciarSesion, setDatosIniciarSesion] = useState({
@@ -19,6 +20,12 @@ const IniciarSesion = () => {
     e.preventDefault();
     console.log('Datos del formulario:', datosIniciarSesion);
   };
+  const IniciarSesion = async (e) => {
+    e.preventDefault()
+    await Logear(datosIniciarSesion)
+    .then(response => {alert(`Su Token es ${response.data.token}`)})
+    .catch((error) => {console.log(error.response.data)})
+  }
   return (
     <>
       <section className="sesescionIniciarSession">
@@ -85,7 +92,7 @@ const IniciarSesion = () => {
                         Password
                       </label>
                     </div>
-                    <button type="submit" className="BotonIngresar">
+                    <button type="submit" onClick={IniciarSesion} className="BotonIngresar">
                       Ingresar
                     </button>
                   </form>
