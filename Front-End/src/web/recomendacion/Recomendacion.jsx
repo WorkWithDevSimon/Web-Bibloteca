@@ -5,8 +5,7 @@ import { DatosRecomendaciones } from "../../api/apisTraidas";
 
 const Recomendacion = () => {
     const VerDatos = async () => {
-        const datos = await (DatosRecomendaciones().data)
-        console.log(datos)
+        await DatosRecomendaciones().then(response => console.log(response))
     }
 
     return (
