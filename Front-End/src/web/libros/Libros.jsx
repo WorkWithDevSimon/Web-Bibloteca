@@ -8,7 +8,8 @@ const Libros = () => {
     const [ContadorLibros, SetContadorLibros] = useState(0)
     return (
         <>
-            <LibroEncabezado CapturarLibros={CapturarLibros} ContadorLibros={ContadorLibros} setCapturarLibros={setCapturarLibros} />
+            <LibroEncabezado CapturarLibros={CapturarLibros} 
+            ContadorLibros={ContadorLibros} setCapturarLibros={setCapturarLibros} SetContadorLibros={SetContadorLibros} />
             <LibroLis DatosLibros={DatosLibros}
                 CapturarLibros={CapturarLibros}
                 setCapturarLibros={setCapturarLibros}

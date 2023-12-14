@@ -13,7 +13,6 @@ class SocioSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ReservaSerializer(serializers.ModelSerializer):
-
     def validate(self, data):
         print(data)
         if datetime.now().date() > data['fecha_devolucion']:

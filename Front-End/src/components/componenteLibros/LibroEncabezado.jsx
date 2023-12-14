@@ -13,7 +13,7 @@ const LibroEncabezado = ({ CapturarLibros, ContadorLibros, SetContadorLibros, se
         SetContadorLibros(0);
 
     };
-    console.log("Estos son los libros", CapturarLibros)
+console.log("Estos son los libros", CapturarLibros)
     return (
         <>
             <header id='HeaderComponente'>
