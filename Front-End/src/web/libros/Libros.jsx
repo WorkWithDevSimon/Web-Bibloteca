@@ -4,11 +4,16 @@ import LibroLis from '../../components/componenteLibros/LibroLis';
 import LibroEncabezado from '../../components/componenteLibros/LibroEncabezado';
 
 const Libros = () => {
-    const [CapturarLibros, setCapturarLibros] = useState([])    
+    const [CapturarLibros, setCapturarLibros] = useState([])
+    const [ContadorLibros, SetContadorLibros] = useState(0)
     return (
         <>
-            <LibroLis DatosLibros={DatosLibros} setCapturarLibros={setCapturarLibros} />
-            <LibroEncabezado CapturarLibros={CapturarLibros} />
+            <LibroEncabezado CapturarLibros={CapturarLibros} ContadorLibros={ContadorLibros} setCapturarLibros={setCapturarLibros} />
+            <LibroLis DatosLibros={DatosLibros}
+                CapturarLibros={CapturarLibros}
+                setCapturarLibros={setCapturarLibros}
+                ContadorLibros={ContadorLibros}
+                SetContadorLibros={SetContadorLibros} />
         </>
     )
 }

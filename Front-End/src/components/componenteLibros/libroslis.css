@@ -35,10 +35,9 @@
     flex-grow: 1;
 }
 
-
+.LibrosNoDisponiblesVer,
 .BtnAgregarLibro {
-    margin: 10px;
-
+    margin: 30px 30px;
     margin-right: 20px;
     padding: 0.5rem 1rem;
     color: #fff;
@@ -61,7 +60,7 @@
     margin-left: 0rem;
     /* Margen izquierdo de 1.5rem */
     border: 1px solid #FF4820;
-    width: 50%;
+    width: 70%;
     text-align: center;
 }
 
@@ -75,21 +74,3 @@
 .info-libros h5 {
     margin: 5px 0;
 }
-
-
-
-
-/* En el archivo CSS */
-.puntuacion {
-    display: flex;
-    align-items: center;
-    font-size: 16px; /* Tamaño de fuente para el texto */
-  }
-  
-  ion-icon {
-    color: #ffc107; /* Color de la estrella (amarillo en este caso) */
-    margin-right: 5px; /* Espacio entre la estrella y el texto */
-    font-size: 20px; /* Tamaño de fuente para la estrella */
-  }
-  
- 

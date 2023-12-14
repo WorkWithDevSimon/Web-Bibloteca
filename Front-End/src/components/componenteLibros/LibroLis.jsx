@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./libroslis.css"
-const LibroLis = ({ DatosLibros, setCapturarLibros }) => {
+const LibroLis = ({ DatosLibros, setCapturarLibros, CapturarLibros, ContadorLibros, SetContadorLibros }) => {
     const [datosImport, setDatosImport] = useState([]);
     const VerDatos = async () => {
         try {
@@ -14,8 +14,15 @@ const LibroLis = ({ DatosLibros, setCapturarLibros }) => {
     useEffect(() => {
         VerDatos();
     }, []);
-    const AgregarLibro = (x) => {
-        setCapturarLibros([x])
+    const AgregarLibro = (x_entregada) => {
+        const libroExistente = CapturarLibros.find(valorx => valorx.id === x_entregada.id);
+
+        if (!libroExistente) {
+            setCapturarLibros([...CapturarLibros, x_entregada]);
+            SetContadorLibros((ContadorLibros) + 1);
+        } else {
+            alert("El libro ya existe en CapturarLibros");
+        }
     }
     return (
         <>
@@ -45,7 +52,7 @@ const LibroLis = ({ DatosLibros, setCapturarLibros }) => {
                                         </button>
                                     ) : (
                                         <>
-                                            <p className="#">Libro no disponible</p>
+                                            <p className="LibrosNoDisponiblesVer">Libro no disponible</p>
                                         </>
                                     )}
                                 </div>
