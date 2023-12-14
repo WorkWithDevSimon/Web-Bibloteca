@@ -12,16 +12,14 @@ class Libro(models.Model):
     disponible = models.BooleanField(default=True)
 
     def __str__(self) -> str:
-        return self.titulo
+        return f"{self.titulo} {self.autor}"
 
 
 class Socio(models.Model):
-    username = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     usuario = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
     password = models.CharField(max_length=254)
 
     def __str__(self) -> str:

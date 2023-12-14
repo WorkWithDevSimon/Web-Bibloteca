@@ -20,7 +20,10 @@ const CrearCuenta = () => {
 
   const guardar = async (e) => {
     e.preventDefault();
-    await InsertarSocios(datos);
+    await InsertarSocios(datos)
+    .then(response => {}).catch((error) => {
+      console.log(error.response.data)
+    });
   };
   return (
     <>

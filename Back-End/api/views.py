@@ -1,10 +1,13 @@
 from rest_framework.response import Response
 from api.serializer import EstadoSerializer, LibroSerializer, ReservaSerializer, SocioSerializer, TokenSerializer
 from api.models import Estado, Libro, Reserva, Socio, Token
+from django.db.models import Count
 from django.shortcuts import render
 from django.contrib.auth.hashers import make_password
 from rest_framework.views import APIView
-from rest_framework import status
+from rest_framework import status, viewsets
+from rest_framework.decorators import action, api_view, renderer_classes
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 from django.http import Http404
 from secrets import token_urlsafe
 
@@ -56,8 +59,8 @@ class SociosView(APIView):
 
     def post(self, request):
         serializer = SocioSerializer(data=request.data)
+        serializer.initial_data["password"] = make_password(serializer.initial_data["password"])
         if serializer.is_valid():
-            serializer.data["password"] = make_password(serializer.data["password"])
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -184,5 +187,23 @@ def login(request):
                     serializer.save()
                     return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({"error": "Usuario no Existe"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(('GET',))
+def libro_mas_popular(request):
+    # SELECT libro_id, COUNT(libro_id) AS num_reservas FROM reservas GROUP BY libro_id 
+    reservas = (Reserva.objects.values("libro")
+                .annotate(num_reservas=Count('libro'))
+                .order_by())
+
+    maximo = {"num_reservas": 0}
+    for libro in reservas:
+        if libro["num_reservas"] > maximo["num_reservas"]:
+            maximo = libro
+
+    maximo["libro"] = Libro.objects.get(id=maximo["libro"]).titulo
+    
+    return Response(maximo)
+
 
 

@@ -16,5 +16,7 @@ urlpatterns = [
     path("ReservasId/<int:pk>",views.ReservasViewId.as_view() ),
     # --------------------------------------------------------------------
     path("Estados/",views.EstadosView.as_view() ),
-    path("EstadosId/<int:pk>",views.EstadosViewId.as_view() )
+    path("EstadosId/<int:pk>",views.EstadosViewId.as_view() ),
+    # --------------------------------------------------------------------
+    path("libro_mas_popular/", views.libro_mas_popular)
  ]
