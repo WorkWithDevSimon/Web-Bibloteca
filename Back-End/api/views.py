@@ -181,12 +181,13 @@ def login(request):
         socio = filtro.first()
         if check_password(password, socio.password):
             token = Token.objects.filter(socio = socio)
-            if token:
-                serializer = TokenSerializer(token)
+            if token.exists():
+                serializer = TokenSerializer(token.first())
                 return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
             else:
                 token = Token(token=token_urlsafe(16), socio=socio)
                 serializer = TokenSerializer(token)
+                token.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response({"error": "Contraseña incorrecta"}, status=status.HTTP_400_BAD_REQUEST)
