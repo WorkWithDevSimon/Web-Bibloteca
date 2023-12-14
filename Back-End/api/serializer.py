@@ -30,11 +30,16 @@ class ReservaSerializer(serializers.ModelSerializer):
         else: return value
 
     def validate_socio(self, value):
+        if not Token.object.filter(socio=value).exists():
+            raise serializers.ValidationError("El socio seleccionado no está autenticado")
+
         reservas_usuario = Reserva.objects.filter(socio = value)
         for r in reservas_usuario:
             if r.estado.nombre == "Atrasada":
                 raise serializers.ValidationError("El socio seleccionado tiene una reserva atrasada")
         return value
+    
+
     
     
     class Meta:
