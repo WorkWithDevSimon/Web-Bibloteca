@@ -188,7 +188,9 @@ def login(request):
                 token = Token(token=token_urlsafe(16), socio=socio)
                 serializer = TokenSerializer(token)
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response({"error": "Usuario no Existe"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"error": "Contraseña incorrecta"}, status=status.HTTP_400_BAD_REQUEST)
+    return Response({"error": "Usuario no Existe"}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(('GET',))
 def libro_mas_popular(request):
