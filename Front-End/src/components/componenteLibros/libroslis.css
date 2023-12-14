@@ -8,27 +8,27 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+
 }
 
 .item {
     display: flex;
     width: 700px;
     margin: 20px;
-    padding: 15px;
     border: 1px solid #ddd;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    transition: transform 0.3s;
+    transition: transform 0.2s;
 }
 
 .item:hover {
-    transform: scale(1.05);
+    transform: scale(1.0);
 }
 
 .item img {
     max-width: 200px;
     height: auto;
-    margin-right: 20px;
+    margin-right: 40px;
 }
 
 .info-libros {
@@ -71,6 +71,12 @@
     border: 0.1px solid #FF4820;
 }
 
-.info-libros h5 {
-    margin: 5px 0;
+.info-libros p {
+    color: #333;
+    margin: 20px;
+    font-size: 18px;
+    line-height: 1.5;
+    font-family: 'Arial', sans-serif;
+    text-align: justify;
+    letter-spacing: 0.5px;
 }

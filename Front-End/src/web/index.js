@@ -1,5 +1,6 @@
-export { default as Libros } from "./libros/Libros"
 export { default as Inicio } from "./inicio/Inicio"
+export { default as Libros } from "./libros/Libros"
+export { default as Recomendacion } from "./recomendacion/Recomendacion"
 export { default as CrearCuenta } from "./CrearCuenta/CrearCuenta"
 export { default as IniciarSession } from "./IniciarSession/IniciarSession"
 export { default as Perfil } from "./perfil/Perfil"

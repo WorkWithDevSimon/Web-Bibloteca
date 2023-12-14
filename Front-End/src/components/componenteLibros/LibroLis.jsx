@@ -6,7 +6,6 @@ const LibroLis = ({ DatosLibros, setCapturarLibros, CapturarLibros, ContadorLibr
         try {
             const response = await DatosLibros();
             setDatosImport(response.data);
-            console.log(response.data)
         } catch (error) {
             console.error("Error al obtener datos de usuarios:", error);
         }
@@ -21,7 +20,7 @@ const LibroLis = ({ DatosLibros, setCapturarLibros, CapturarLibros, ContadorLibr
             setCapturarLibros([...CapturarLibros, x_entregada]);
             SetContadorLibros((ContadorLibros) + 1);
         } else {
-            alert("El libro ya existe en CapturarLibros");
+            alert("El libro ya existe en tu Reserva de Lecturas");
         }
     }
     return (
@@ -32,7 +31,7 @@ const LibroLis = ({ DatosLibros, setCapturarLibros, CapturarLibros, ContadorLibr
             <span className="border border-primary"></span>
             <div className="contenendorLibreria">
                 {datosImport.length === 0 ? (
-                    <h1>No hay productos hasta el momento</h1>
+                    <h1>No hay libros hasta el momento</h1>
                 ) : (
                     datosImport.map(x => (
                         <div className="item" key={x.id}>
@@ -58,12 +57,12 @@ const LibroLis = ({ DatosLibros, setCapturarLibros, CapturarLibros, ContadorLibr
                                 </div>
                             </div>
                             <div className="info-libros">
-                                <h6>Titulo:{x.titulo}</h6>
-                                <h6>Autor:{x.autor}</h6>
-                                <h6>Editorial:{x.editorial}</h6>
-                                <h6>Coleccion:{x.coleccion}</h6>
-                                <h6>Año:{x.año}</h6>
-                                <h6>Paginas:{x.paginas}</h6>
+                                <p>Titulo:{x.titulo}</p>
+                                <p>Autor:{x.autor}</p>
+                                <p>Editorial:{x.editorial}</p>
+                                <p>Coleccion:{x.coleccion}</p>
+                                <p>Año:{x.año}</p>
+                                <p>Paginas:{x.paginas}</p>
                             </div>
                         </div>
                     ))

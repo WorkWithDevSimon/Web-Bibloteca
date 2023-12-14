@@ -188,21 +188,15 @@ def login(request):
                     return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({"error": "Usuario no Existe"}, status=status.HTTP_400_BAD_REQUEST)
 
-
 @api_view(('GET',))
 def libro_mas_popular(request):
     # SELECT libro_id, COUNT(libro_id) AS num_reservas FROM reservas GROUP BY libro_id 
-    reservas = (Reserva.objects.values("libro")
-                .annotate(num_reservas=Count('libro'))
-                .order_by())
-
+    reservas = (Reserva.objects.values("libro").annotate(num_reservas=Count('libro')).order_by())
     maximo = {"num_reservas": 0}
     for libro in reservas:
         if libro["num_reservas"] > maximo["num_reservas"]:
             maximo = libro
-
     maximo["libro"] = Libro.objects.get(id=maximo["libro"]).titulo
-    
     return Response(maximo)
 
 

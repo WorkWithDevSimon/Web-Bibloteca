@@ -10,7 +10,6 @@ class Libro(models.Model):
     paginas = models.CharField(max_length=10)
     imagenURL = models.CharField(max_length=200)
     disponible = models.BooleanField(default=True)
-
     def __str__(self) -> str:
         return f"{self.titulo} {self.autor}"
 
@@ -21,14 +20,12 @@ class Socio(models.Model):
     email = models.CharField(max_length=50)
     usuario = models.CharField(max_length=50)
     password = models.CharField(max_length=254)
-
     def __str__(self) -> str:
         return f"{self.nombre} {self.apellido}"
 
 
 class Estado(models.Model):
     nombre = models.CharField(max_length=50)
-
     def __str__(self) -> str:
         return self.nombre
 
@@ -36,9 +33,9 @@ class Estado(models.Model):
 class Reserva(models.Model):
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
     socio = models.ForeignKey(Socio, on_delete=models.CASCADE)
+    estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
     fecha_inicio = models.DateField(auto_now=True, auto_now_add=False)
     fecha_devolucion = models.DateField(auto_now=False, auto_now_add=False)
-    estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f"{self.libro}, {self.fecha_inicio} a {self.fecha_devolucion}, Socio: {self.socio}, Estado: {self.estado}"

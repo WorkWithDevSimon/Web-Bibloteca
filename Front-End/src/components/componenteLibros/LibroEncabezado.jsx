@@ -8,12 +8,9 @@ const LibroEncabezado = ({ CapturarLibros, ContadorLibros, SetContadorLibros, se
         setCapturarLibros(nuevaListaLibros);
         SetContadorLibros(((ContadorLibros) - 1));
     };
-
     const comprarProducto = () => {
-        SetContadorLibros(0);
-
+        console.log("Estos son los libros:", CapturarLibros)
     };
-console.log("Estos son los libros", CapturarLibros)
     return (
         <>
             <header id='HeaderComponente'>
@@ -41,7 +38,7 @@ console.log("Estos son los libros", CapturarLibros)
                         {CapturarLibros.length ? (
                             <>
                                 <p style={{ fontSize: '18px', color: '#000', fontWeight: 'bold', textAlign: 'center' }}>
-                                    ¡Encuentra lo que te inspira y adquiere productos de calidad!
+                                    ¡Encuentra lo que te inspira y adquiere libros de calidad!
                                 </p>
                                 <div className="row-product">
                                     {CapturarLibros.map((valor) => (
@@ -77,7 +74,7 @@ console.log("Estos son los libros", CapturarLibros)
 
                             </>
                         ) : (
-                            <p className="cart-empty">El carrito está vacío</p>
+                            <p className="cart-empty">La reserva de lecturas se encuentra actualmente vacía</p>
                         )}
                     </div>
                 </div>

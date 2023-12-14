@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import './Navegador.css';
 const Menu = () => (
   <>
-    <Link to="/Inicio">INICIO</Link>
-    <Link to="/Libros">LIBROS</Link>
+    <Link to="/Inicio">Inicio</Link>
+    <Link to="/Libros">Libros</Link>
+    <Link to="/Recomendacion">Recomendaciones</Link>
   </>
 );
 const Navegador = () => {
