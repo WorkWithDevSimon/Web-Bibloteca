@@ -3,7 +3,7 @@ from api.serializer import EstadoSerializer, LibroSerializer, ReservaSerializer,
 from api.models import Estado, Libro, Reserva, Socio, Token
 from django.db.models import Count
 from django.shortcuts import render
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from rest_framework.views import APIView
 from rest_framework import status, viewsets
 from rest_framework.decorators import action, api_view, renderer_classes
@@ -175,7 +175,7 @@ def login(request):
     username = request.POST["username"]
     password = request.POST["password"]
     for socio in socios:
-        if username == socio.username and password == socio.password:
+        if username == socio.username and check_password(password, socio.password):
             token = Token.objects.filter(socio = socio).first()
             if token:
                 serializer = TokenSerializer(token)
@@ -196,8 +196,10 @@ def libro_mas_popular(request):
     for libro in reservas:
         if libro["num_reservas"] > maximo["num_reservas"]:
             maximo = libro
-    maximo["libro"] = Libro.objects.get(id=maximo["libro"]).titulo
-    return Response(maximo)
+    if "libro" in maximo:
+        maximo["libro"] = Libro.objects.get(id=maximo["libro"]).titulo
+        return Response(maximo, status=status.HTTP_200_OK)
+    else: return Response({"error": "No se encontraron registros"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 
