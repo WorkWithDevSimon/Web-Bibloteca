@@ -1,1 +1,43 @@
- 
+@keyframes EscribirTextito {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 95%;
+        /* Ajusta el ancho según sea necesario */
+    }
+}
+
+.BinevendiosBliboteca h1 {
+    margin: 20px;
+    text-align: center;
+    padding: 2%;
+    font-family: Arial, sans-serif;
+    font-size: 2.5rem;
+    color: #ffffff;
+    /* Cambiado a un color más llamativo */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    background: #000000;
+    animation: EscribirTextito 4s ease-in-out forwards;
+
+}
+
+
+.BinevendiosBliboteca :hover {
+    margin: 20px;
+    text-align: center;
+    padding: 2%;
+    font-family: Arial, sans-serif;
+    font-size: 2.5rem;
+    color: #000000;
+    /* Cambiado a un color más llamativo */
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    background: #ffffff;
+    animation: EscribirTextito 4s ease-in-out forwards;
+
+}

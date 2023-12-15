@@ -25,9 +25,6 @@ const LibroLis = ({ DatosLibros, setCapturarLibros, CapturarLibros, ContadorLibr
     }
     return (
         <>
-            <div className='BinevendiosBliboteca'>
-                <h1>BIENVENIDO A LA BIBLOTECA</h1>
-            </div>
             <span className="border border-primary"></span>
             <div className="contenendorLibreria">
                 {datosImport.length === 0 ? (

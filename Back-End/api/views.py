@@ -1,5 +1,11 @@
 from rest_framework.response import Response
-from api.serializer import EstadoSerializer, LibroSerializer, ReservaSerializer, SocioSerializer, TokenSerializer
+from api.serializer import (
+    EstadoSerializer,
+    LibroSerializer,
+    ReservaSerializer,
+    SocioSerializer,
+    TokenSerializer,
+)
 from api.models import Estado, Libro, Reserva, Socio, Token
 from django.db.models import Count
 from django.shortcuts import render
@@ -10,6 +16,7 @@ from rest_framework.decorators import action, api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 from django.http import Http404
 from secrets import token_urlsafe
+
 
 class LibrosView(APIView):
     def get(self, request):
@@ -59,11 +66,14 @@ class SociosView(APIView):
 
     def post(self, request):
         serializer = SocioSerializer(data=request.data)
-        serializer.initial_data["password"] = make_password(serializer.initial_data["password"])
+        serializer.initial_data["password"] = make_password(
+            serializer.initial_data["password"]
+        )
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class SociosViewId(APIView):
     def get_object(self, pk):
@@ -171,16 +181,16 @@ class EstadosViewId(APIView):
         estado.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-@api_view(('POST',))
+
+@api_view(("POST",))
 def login(request):
     username = request.data["usuario"]
     password = request.data["password"]
-
     filtro = Socio.objects.filter(usuario=username)
     if filtro.exists():
         socio = filtro.first()
         if check_password(password, socio.password):
-            token = Token.objects.filter(socio = socio)
+            token = Token.objects.filter(socio=socio)
             if token.exists():
                 serializer = TokenSerializer(token.first())
                 return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
@@ -190,13 +200,17 @@ def login(request):
                 token.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            return Response({"error": "Contraseña incorrecta"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"error": "Contraseña incorrecta"}, status=status.HTTP_400_BAD_REQUEST
+            )
     return Response({"error": "Usuario no Existe"}, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(('GET',))
+
+@api_view(("GET",))
 def libro_mas_popular(request):
-    # SELECT libro_id, COUNT(libro_id) AS num_reservas FROM reservas GROUP BY libro_id 
-    reservas = (Reserva.objects.values("libro").annotate(num_reservas=Count('libro')).order_by())
+    reservas = (
+        Reserva.objects.values("libro").annotate(num_reservas=Count("libro")).order_by()
+    )
     maximo = {"num_reservas": 0}
     for libro in reservas:
         if libro["num_reservas"] > maximo["num_reservas"]:
@@ -204,7 +218,7 @@ def libro_mas_popular(request):
     if "libro" in maximo:
         maximo["libro"] = LibroSerializer(Libro.objects.get(id=maximo["libro"])).data
         return Response(maximo, status=status.HTTP_200_OK)
-    else: return Response({"error": "No se encontraron registros"}, status=status.HTTP_400_BAD_REQUEST)
-
-
-
+    else:
+        return Response(
+            {"error": "No se encontraron registros"}, status=status.HTTP_400_BAD_REQUEST
+        )

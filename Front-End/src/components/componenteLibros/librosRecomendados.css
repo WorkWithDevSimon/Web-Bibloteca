@@ -1,0 +1,45 @@
+.containerMejorLibro {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px;
+}
+
+.libroContainer {
+  text-align: center;
+  margin: 10px;
+  padding: 15px;
+  background-color: #ffffff;
+  /* Blanco más oscuro para resaltar */
+  border: 1px solid #ccc;
+  width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  /* Sombra más pronunciada para el efecto 3D */
+  color: #333;
+  /* Color del texto para que destaque */
+}
+
+
+.imagenLibro {
+  width: 300px;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.tituloLibro {
+  color: #000000;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.autorLibro {
+  color: #000000;
+  font-size: 16px;
+}
+
+.MejorLibro {
+  color: #000000;
+
+}

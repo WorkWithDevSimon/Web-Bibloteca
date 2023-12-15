@@ -23,8 +23,8 @@ const IniciarSesion = () => {
   const IniciarSesion = async (e) => {
     e.preventDefault()
     await Logear(datosIniciarSesion)
-    .then(response => {alert(`Su Token es ${response.data.token}`)})
-    .catch((error) => {console.log(error.response.data)})
+      .then(response => { alert(`Su Token es ${response.data.socio_id}`) })
+      .catch((error) => { console.log(error.response.data) })
   }
   return (
     <>
