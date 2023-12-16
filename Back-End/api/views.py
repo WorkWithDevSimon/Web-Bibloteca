@@ -8,14 +8,15 @@ from api.serializer import (
 )
 from api.models import Estado, Libro, Reserva, Socio, Token
 from django.db.models import Count
-from django.shortcuts import render
 from django.contrib.auth.hashers import make_password, check_password
 from rest_framework.views import APIView
-from rest_framework import status, viewsets
+from rest_framework import status
 from rest_framework.decorators import action, api_view, renderer_classes
-from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 from django.http import Http404
 from secrets import token_urlsafe
+
+
+from django.http import Http404
 
 
 class LibrosView(APIView):
@@ -31,13 +32,12 @@ class LibrosView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class LibrosViewId(APIView):
     def get_object(self, pk):
         try:
-            Libro.objects.get(pk)
+            return Libro.objects.get(pk=pk)
         except Libro.DoesNotExist:
-            return Http404
+            raise Http404
 
     def get(self, request, pk):
         libro = self.get_object(pk)

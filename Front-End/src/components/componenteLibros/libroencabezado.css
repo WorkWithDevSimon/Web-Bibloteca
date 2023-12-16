@@ -212,3 +212,8 @@
     transform: scale(1.03);
     border-radius: 0;
 }
+ 
+.parrafoTitulo{
+    text-align: center;
+    margin-left: 4px;
+ }

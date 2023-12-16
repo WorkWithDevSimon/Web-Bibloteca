@@ -1,0 +1,89 @@
+.containerMejorLibro {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px;
+}
+
+.libroContainer {
+  text-align: center;
+  margin: 10px;
+  padding: 15px;
+  background-color: #ffffff;
+  /* Blanco más oscuro para resaltar */
+  border: 1px solid #ccc;
+  width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  /* Sombra más pronunciada para el efecto 3D */
+  color: #333;
+  /* Color del texto para que destaque */
+}
+
+
+.imagenLibro {
+  width: 300px;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.tituloLibro {
+  color: #000000;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.autorLibro {
+  color: #000000;
+  font-size: 16px;
+}
+
+.MejorLibro {
+  color: #000000;
+
+}
+
+keyframes EscribirTextito {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 95%;
+    /* Ajusta el ancho según sea necesario */
+  }
+}
+
+.BinevendiosRecomendaciones h1 {
+  margin: 20px;
+  text-align: center;
+  padding: 2%;
+  font-family: Arial, sans-serif;
+  font-size: 2.5rem;
+  color: #ffffff;
+  /* Cambiado a un color más llamativo */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  background: #000000;
+  animation: EscribirTextito 4s ease-in-out forwards;
+
+}
+
+
+.BinevendiosRecomendaciones :hover {
+  margin: 20px;
+  text-align: center;
+  padding: 2%;
+  font-family: Arial, sans-serif;
+  font-size: 2.5rem;
+  color: #000000;
+  /* Cambiado a un color más llamativo */
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  background: #ffffff;
+  animation: EscribirTextito 4s ease-in-out forwards;
+
+}

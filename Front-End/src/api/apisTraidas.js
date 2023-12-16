@@ -5,6 +5,11 @@ const LibrosTraidos = axios.create({
     baseURL: "http://127.0.0.1:8000/Librerias/"
 });
 export const DatosLibros = () => LibrosTraidos.get("/");
+export const actualizarLibrosTraidos = (id, datos) => {
+    const url = `/${id}/`;
+    console.log('URL de actualización:', url);
+    return LibrosTraidos.put(url, datos);
+};
 // ------------------------------------------------------------------------------------------------------------
 const LibrosRecomendados = axios.create({
     baseURL: "http://127.0.0.1:8000/libro_mas_popular/"
@@ -24,13 +29,13 @@ const Login = axios.create({
 export const Logear = (dato) => Login.post("/", dato)
 // ------------------------------------------------------------------------------------------------------------
 const ReservasTraidas = axios.create({
-    baseURL: "http://127.0.0.1:8000/Socios/"
+    baseURL: "http://127.0.0.1:8000/Reservas/"
 });
 export const DatosReserva = () => ReservasTraidas.get("/");
 export const InsertarReserva = (dato) => ReservasTraidas.post("/", dato);
 // ------------------------------------------------------------------------------------------------------------
 const EstadosTraidas = axios.create({
-    baseURL: "http://127.0.0.1:8000/Socios/"
+    baseURL: "http://127.0.0.1:8000/Estados/"
 });
 export const DatosEstado = () => EstadosTraidas.get("/");
 export const InsertarEstado = (dato) => EstadosTraidas.post("/", dato);

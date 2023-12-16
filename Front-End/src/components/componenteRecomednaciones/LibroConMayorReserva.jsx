@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import './librosRecomendados.css';
+import React, { useEffect, useState } from 'react'
 
-const CourseLosMejoreLibros = ({ DatosRecomendaciones }) => {
+import "./libroconmayorreserva.css"
+
+const LibroConMayorReserva = ({ DatosRecomendaciones }) => {
     const [datosLibrosMejores, setdatosLibrosMejores] = useState([]);
-
     const VerDatos = async () => {
         try {
             const respuesta = await DatosRecomendaciones();
-            setdatosLibrosMejores([respuesta.data]);
+            return setdatosLibrosMejores([respuesta.data]);
         } catch (error) {
             console.log("Error al obtener los datos de los mejores libros", error);
         }
     };
-
     useEffect(() => {
         VerDatos();
     }, []);
-
     return (
         <>
+            <div className='BinevendiosRecomendaciones'>
+                <h1>BIENVENIDO A LA SESSION DE RECOMENDACIONES</h1>
+            </div>
             <div className='containerMejorLibro'>
                 {datosLibrosMejores.map((x, index) => (
                     <div className='libroContainer' key={index}>
@@ -34,4 +35,4 @@ const CourseLosMejoreLibros = ({ DatosRecomendaciones }) => {
     );
 };
 
-export default CourseLosMejoreLibros;
+export default LibroConMayorReserva

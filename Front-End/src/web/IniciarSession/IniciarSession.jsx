@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './iniciarSession.css'; // Importa el archivo CSS con los estilos
 import { Logear } from "../../api/apisTraidas";
+import { MiContexto } from "../../context/UseProveedor";
+import { useNavigate } from 'react-router-dom';
+
 
 const IniciarSesion = () => {
   const [datosIniciarSesion, setDatosIniciarSesion] = useState({
@@ -9,6 +12,8 @@ const IniciarSesion = () => {
     usuario: '',
     password: '',
   });
+  const navigate = useNavigate();
+  const { setCapturarIDusuario } = useContext(MiContexto);
   const DatosExtraidos = (e) => {
     const { name, value } = e.target;
     setDatosIniciarSesion((prevDatos) => ({
@@ -16,16 +21,18 @@ const IniciarSesion = () => {
       [name]: value,
     }));
   };
-  const DatosInciarSession = (e) => {
-    e.preventDefault();
-    console.log('Datos del formulario:', datosIniciarSesion);
-  };
-  const IniciarSesion = async (e) => {
+  const DatosInciarSession = async (e) => {
     e.preventDefault()
-    await Logear(datosIniciarSesion)
-      .then(response => { alert(`Su Token es ${response.data.socio_id}`) })
-      .catch((error) => { console.log(error.response.data) })
-  }
+    try {
+      const IdUsuario = (await Logear(datosIniciarSesion)).data
+      setCapturarIDusuario(IdUsuario.socio)
+      navigate("/Perfil");
+
+    } catch (error) {
+      alert(error.response.data.error)
+    }
+  };
+
   return (
     <>
       <section className="sesescionIniciarSession">
@@ -35,7 +42,7 @@ const IniciarSesion = () => {
               <div className="card cascading-right">
                 <div className="card-body p-5 shadow-5 text-center">
                   <h2 className="fw-bold mb-5">INICIAR SESIÓN</h2>
-                  <form onSubmit={DatosInciarSession}>
+                  <form  >
                     <div className="row">
                       <div className="col-md-6 mb-4">
                         <div className="form-outline">
@@ -66,10 +73,9 @@ const IniciarSesion = () => {
                         </div>
                       </div>
                     </div>
-
                     <div className="form-outline mb-4">
                       <input
-                        type="email"
+                        type="text"
                         name="usuario"
                         className="form-control"
                         value={datosIniciarSesion.usuario}
@@ -92,7 +98,7 @@ const IniciarSesion = () => {
                         Password
                       </label>
                     </div>
-                    <button type="submit" onClick={IniciarSesion} className="BotonIngresar">
+                    <button type="submit" className="BotonIngresar" onClick={DatosInciarSession}>
                       Ingresar
                     </button>
                   </form>

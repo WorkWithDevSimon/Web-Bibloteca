@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './CrearCuenta.css';
 import { InsertarSocios } from "../../api/apisTraidas";
+import { useNavigate } from 'react-router-dom';
 
 const CrearCuenta = () => {
+  const navigate = useNavigate();
+
   const [datos, setDatos] = useState({
     nombre: '',
     apellido: '',
@@ -10,6 +13,7 @@ const CrearCuenta = () => {
     usuario: '',
     password: '',
   });
+
   const DatosIngresados = (e) => {
     const { name, value } = e.target;
     setDatos((prevDatos) => ({
@@ -21,9 +25,13 @@ const CrearCuenta = () => {
   const guardar = async (e) => {
     e.preventDefault();
     await InsertarSocios(datos)
-    .then(response => {}).catch((error) => {
-      console.log(error.response.data)
-    });
+      .then(response => {
+        alert("Cuenta creada exitosamente")
+        navigate("/Iniciar-Session");
+      }).catch((error) => {
+        console.log(error.response.data)
+        alert("Ingrese datos validos")
+      });
   };
   return (
     <>

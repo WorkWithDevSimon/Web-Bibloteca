@@ -1,19 +1,67 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./libroencabezado.css";
 
-const LibroEncabezado = ({ CapturarLibros, ContadorLibros, SetContadorLibros, setCapturarLibros }) => {
+const LibroEncabezado = ({ CapturarLibros, CapturarIDusuario,
+    ContadorLibros, SetContadorLibros, setCapturarLibros, InsertarReserva, DatosEstado, actualizarLibrosTraidos }) => {
     const [activo, setActivo] = useState(true);
+    const [datosImport, setDatosImport] = useState([]);
     const EliminarLibros = (valor) => {
         const nuevaListaLibros = CapturarLibros.filter(libro => libro.id !== valor.id);
         setCapturarLibros(nuevaListaLibros);
         SetContadorLibros(((ContadorLibros) - 1));
     };
-    const comprarProducto = async() => {
-        for (let i = 0; i < CapturarLibros.length; i++) {
-            const producto = CapturarLibros[i];
-            alert(producto.id)
-        };
+    const VerDatos = async () => {
+        try {
+            const response = await DatosEstado();
+            setDatosImport(response.data);
+        } catch (error) {
+            console.error("Error al obtener datos de usuarios:", error);
+        }
     }
+    useEffect(() => {
+        VerDatos();
+    }, []);
+    const comprarProducto = async () => {
+        if (CapturarIDusuario) {
+            try {
+                await Promise.all(CapturarLibros.map(async (datosDeLosLibros) => {
+                    const idUsuario = CapturarIDusuario;
+                    const fechaActual = new Date();
+                    const dia = fechaActual.getDate();
+                    const mes = fechaActual.getMonth() + 1;
+                    const anio = fechaActual.getFullYear();
+
+                    const ActualizarLibros = {
+                        titulo: datosDeLosLibros.titulo,
+                        autor: datosDeLosLibros.autor,
+                        editorial: datosDeLosLibros.editorial,
+                        coleccion: datosDeLosLibros.coleccion,
+                        año: datosDeLosLibros.año,
+                        paginas: datosDeLosLibros.paginas,
+                        imagenURL: datosDeLosLibros.imagenURL,
+                        disponible: false,
+                    };
+
+                    const inserarResevaDelusuarioLibro = {
+                        fecha_inicio: `${anio}-${mes}-${dia}`,
+                        fecha_devolucion: `${anio}-${mes}-${dia}`,
+                        libro: datosDeLosLibros.id,
+                        socio: idUsuario,
+                        estado: datosImport[0].id,
+                    };
+
+                    await InsertarReserva(inserarResevaDelusuarioLibro);
+                    await actualizarLibrosTraidos(datosDeLosLibros.id, ActualizarLibros);
+                }));
+
+                alert("Reserva del Libro creada exitosamente");
+            } catch (error) {
+                console.error("Error al reservar:", error);
+            }
+        } else {
+            alert("Ingrese a su cuenta");
+        }
+    };
     return (
         <>
             <header id='HeaderComponente'>
@@ -45,6 +93,7 @@ const LibroEncabezado = ({ CapturarLibros, ContadorLibros, SetContadorLibros, se
                                 </p>
                                 <div className="row-product">
                                     {CapturarLibros.map((valor) => (
+
                                         <div className="cart-product" key={valor.id}>
                                             <div className="info-cart-product">
                                                 <span className="cantidad-producto-carrito">
@@ -52,7 +101,7 @@ const LibroEncabezado = ({ CapturarLibros, ContadorLibros, SetContadorLibros, se
                                                         src={valor.imagenURL} style={{ width: "100px" }}
                                                     />
                                                 </span>
-                                                <p> {valor.titulo}</p>
+                                                <p className='parrafoTitulo'>Titulo: {valor.titulo}</p>
                                             </div>
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -66,12 +115,14 @@ const LibroEncabezado = ({ CapturarLibros, ContadorLibros, SetContadorLibros, se
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                                             </svg>
                                         </div>
+
+
                                     ))}
                                 </div>
 
                                 <div className="button-container">
                                     <div className="button-container">
-                                        <button className='btn-clear-all' onClick={comprarProducto} >Confirmar Comprar</button>
+                                        <button className='btn-clear-all' onClick={comprarProducto} >Confirmar Reserva <ion-icon name="book-outline"></ion-icon></button>
                                     </div>
                                 </div>
 
