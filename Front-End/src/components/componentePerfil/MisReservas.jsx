@@ -31,7 +31,7 @@ const MisReservas = ({ DatosLibros, CapturarIDusuario, DatosDeMiReservaDeLibros,
     };
     useEffect(() => {
         obtenerDatosReservas();
-    }, [CapturarIDusuario]);  
+    }, [CapturarIDusuario]);
     return (
         <div>
             <h3>Registro de mis reservas</h3>
@@ -45,7 +45,7 @@ const MisReservas = ({ DatosLibros, CapturarIDusuario, DatosDeMiReservaDeLibros,
                         <th>Fecha de Inicio</th>
                         <th>Fecha de Devolución</th>
                         <th>Estado</th>
-                        <th>Acciones</th>
+                        <th>Accion</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,7 +61,7 @@ const MisReservas = ({ DatosLibros, CapturarIDusuario, DatosDeMiReservaDeLibros,
                                 <td>{reserva.estado_nombre}</td>
                                 <td>
                                     <button onClick={() => eliminarYActualizarReserva(reserva.id, reserva.libro_id)} className='btn btn-danger'>
-                                        Cancelar
+                                        Devolver Libro
                                     </button>
                                 </td>
                             </tr>
