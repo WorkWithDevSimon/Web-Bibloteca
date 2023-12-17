@@ -1,11 +1,16 @@
-import React from 'react'
-import "./perfil.css"
 import { useContext } from 'react';
 import { MiContexto } from "../../context/UseProveedor";
 import { useNavigate } from 'react-router-dom';
+import "./perfil.css"
+import MisReservas from '../../components/componentePerfil/MisReservas';
+
+import { DatosDeMiReservaDeLibros,EliminarReservaPorID,actualizarLibrosTraidos,DatosLibros} from "../../api/apisTraidas";
+
+
+
 
 const Perfil = () => {
-    const { setCapturarIDusuario } = useContext(MiContexto);
+    const { CapturarIDusuario, setCapturarIDusuario } = useContext(MiContexto);
     const navigate = useNavigate();
     const CerrarSession = () => {
         setCapturarIDusuario()
@@ -13,10 +18,22 @@ const Perfil = () => {
     }
     return (
         <>
-            <div>Perfil</div>
-            <button onClick={CerrarSession}>Cerrar Session</button>
+            <div className="container">
+                <h1 className="TituloPerfil">Mi Perfil</h1>
+                <button onClick={CerrarSession} className="BotonCerrarSeccionn">
+                    <ion-icon name="exit-outline"></ion-icon>Cerrar la sesión
+                </button>
+                <br />
+                <h2  className='datosCuenta'>Datos de mi cuenta</h2>
+                <div>
+                    <MisReservas CapturarIDusuario={CapturarIDusuario}
+                     DatosDeMiReservaDeLibros={DatosDeMiReservaDeLibros}
+                     EliminarReservaPorID={EliminarReservaPorID}
+                     actualizarLibrosTraidos={actualizarLibrosTraidos}
+                     DatosLibros={DatosLibros} />
+                </div>
+            </div>
         </>
     )
 }
-
 export default Perfil

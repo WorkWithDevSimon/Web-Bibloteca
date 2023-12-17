@@ -1,0 +1,100 @@
+/* librosautor.css */
+
+.libros-por-autor-container {
+    background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.title-container {
+    text-align: center;
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.autor-input {
+    padding: 10px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.filtrar-button {
+    padding: 0.5rem 1rem;
+    /* Relleno en el botón */
+    color: #fff;
+    /* Color del texto en blanco */
+    background: #FF4820;
+    /* Fondo en color #FF4820 */
+    font-family: var(--font-family);
+    /* Utiliza la fuente definida en la variable --font-family */
+    font-weight: 500;
+    /* Peso de fuente 500 (mediano) */
+    font-size: 15px;
+    /* Tamaño de fuente de 18px */
+    line-height: 25px;
+    /* Altura de línea de 25px */
+    border: none;
+    /* Sin borde */
+    outline: none;
+    /* Sin contorno */
+    cursor: pointer;
+    /* Cambia el cursor al puntero */
+    border-radius: 5px;
+    /* Borde redondeado de 5px */
+    margin-left: 0rem;
+    /* Margen izquierdo de 1.5rem */
+    border: 1px solid #FF4820;
+    /* Añade la propiedad de borde con el color naranja */
+    width:auto;
+    text-align: center;
+}
+
+/* Resto de estilos... */
+
+.filtrar-button:hover {
+    color: #fff;
+    background: #000000;
+    border: 0.1px solid #FF4820;
+}
+
+
+.imagen-libros-disponibles {
+    display: flex;
+    flex-wrap: nowrap;
+    /* Evita que se envuelva a la siguiente línea */
+    justify-content: flex-start;
+    /* Alinea las imágenes al principio del contenedor */
+    overflow-x: auto;
+    margin-bottom: 50px;
+}
+
+.libro-imagen {
+    margin-right: 10px;
+}
+
+.libro-imagen img {
+    width: 300px;
+    height: 450px;
+    object-fit: cover;
+    opacity: .8;
+}
+
+.libro-imagen img:hover {
+    width: 320px;
+    cursor: crosshair;
+    transition: .5s ease;
+    opacity: .8;
+    filter: contrast(120%);
+}
+
+.mensaje-libros-disponibles {
+    text-align: center;
+    color: #555;
+    margin-top: 20px;
+    font-style: italic;
+}

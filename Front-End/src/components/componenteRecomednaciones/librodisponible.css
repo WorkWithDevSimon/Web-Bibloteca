@@ -1,0 +1,30 @@
+.imagenLibrosDisponibles {
+    display: flex;
+    flex-wrap: nowrap; /* Evita que se envuelva a la siguiente línea */
+    justify-content: flex-start; /* Alinea las imágenes al principio del contenedor */
+    overflow-x: auto;
+    margin-bottom: 50px;
+}
+
+.libroImagen {
+    margin-right: 10px;
+}
+
+.libroImagen img {
+    width: 300px;
+    height: 450px;
+    object-fit: cover;
+    opacity: .8;
+}
+
+.libroImagen img:hover {
+    width: 320px;
+    cursor: crosshair;
+    transition: .5s ease;
+    opacity: .8;
+    filter: contrast(120%);
+}
+
+.librosDisponibles {
+    text-align: center;
+}

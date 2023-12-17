@@ -63,3 +63,27 @@ class TokenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Token
         fields = "__all__"
+
+
+class SerializarDatosReservasObtenrTituloAutorImg(serializers.ModelSerializer):
+    libro_titulo = serializers.CharField(source="libro.titulo", read_only=True)
+    libro_id = serializers.CharField(source="libro.id", read_only=True)
+    libro_autor = serializers.CharField(source="libro.autor", read_only=True)
+    libro_imagenURL = serializers.CharField(source="libro.imagenURL", read_only=True)
+    estado_nombre = serializers.CharField(source="estado.nombre", read_only=True)
+    class Meta:
+        model = Reserva
+        fields = [
+            "id",
+            "libro_titulo",
+            "libro_id",
+            "libro_autor",
+            "libro_imagenURL",
+            "fecha_inicio",
+            "fecha_devolucion",
+            "socio",
+            "estado_nombre",
+        ]
+
+
+ 

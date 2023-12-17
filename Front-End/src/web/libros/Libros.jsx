@@ -5,6 +5,7 @@ import LibroEncabezado from '../../components/componenteLibros/LibroEncabezado';
 import './Libros.css';
  
 import { MiContexto } from "../../context/UseProveedor";
+import { useNavigate } from 'react-router-dom';
 
 const Libros = () => {
     const [CapturarLibros, setCapturarLibros] = useState([]);
@@ -24,6 +25,7 @@ const Libros = () => {
                 InsertarReserva={InsertarReserva}
                 DatosEstado={DatosEstado}
                 actualizarLibrosTraidos={actualizarLibrosTraidos}
+                useNavigate={useNavigate}
             />
             <LibroLis
                 DatosLibros={DatosLibros}

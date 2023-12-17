@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import "./libroencabezado.css";
 
-const LibroEncabezado = ({ CapturarLibros, CapturarIDusuario,
+const LibroEncabezado = ({ CapturarLibros, CapturarIDusuario, useNavigate,
     ContadorLibros, SetContadorLibros, setCapturarLibros, InsertarReserva, DatosEstado, actualizarLibrosTraidos }) => {
     const [activo, setActivo] = useState(true);
     const [datosImport, setDatosImport] = useState([]);
+    const navigate = useNavigate();
+
     const EliminarLibros = (valor) => {
         const nuevaListaLibros = CapturarLibros.filter(libro => libro.id !== valor.id);
         setCapturarLibros(nuevaListaLibros);
@@ -41,20 +43,20 @@ const LibroEncabezado = ({ CapturarLibros, CapturarIDusuario,
                         imagenURL: datosDeLosLibros.imagenURL,
                         disponible: false,
                     };
-
                     const inserarResevaDelusuarioLibro = {
                         fecha_inicio: `${anio}-${mes}-${dia}`,
-                        fecha_devolucion: `${anio}-${mes}-${dia}`,
+                        fecha_devolucion: `${anio}-${mes}-${dia + 2}`,
                         libro: datosDeLosLibros.id,
                         socio: idUsuario,
                         estado: datosImport[0].id,
                     };
-
                     await InsertarReserva(inserarResevaDelusuarioLibro);
                     await actualizarLibrosTraidos(datosDeLosLibros.id, ActualizarLibros);
                 }));
-
                 alert("Reserva del Libro creada exitosamente");
+                navigate("/Perfil");
+
+
             } catch (error) {
                 console.error("Error al reservar:", error);
             }

@@ -1,0 +1,57 @@
+/* socioliborsocupados.css */
+
+ 
+
+.heading {
+    color: #000000;
+    text-align: center;
+}
+
+.custom-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-table-header {
+    background-color: #ea0000;
+    color: #000000;
+}
+
+.custom-table th,
+.custom-table td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: left;
+}
+
+.socio-info {
+    max-width: 250px;
+}
+
+.libros-reservados {
+    max-width: 500px;
+}
+
+.custom-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.custom-list-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.libro-info {
+    flex-grow: 1;
+}
+
+.custom-image {
+    max-width: 100px;
+    border-radius: 5px;
+}

@@ -9,6 +9,8 @@ const Menu = () => (
     <Link to="/Inicio">Inicio</Link>
     <Link to="/Libros">Libros</Link>
     <Link to="/Recomendaciones">Recomendaciones</Link>
+    <Link to="/BuscarLibros">Buscar <ion-icon name="search-outline"></ion-icon></Link>
+    <Link to="/Socio">Socio <ion-icon name="person-outline"></ion-icon></Link>
   </>
 );
 const Navegador = () => {

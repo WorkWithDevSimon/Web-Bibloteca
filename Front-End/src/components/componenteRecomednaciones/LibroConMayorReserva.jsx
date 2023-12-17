@@ -18,7 +18,7 @@ const LibroConMayorReserva = ({ DatosRecomendaciones }) => {
     return (
         <>
             <div className='BinevendiosRecomendaciones'>
-                <h1>BIENVENIDO A LA SESSION DE RECOMENDACIONES</h1>
+                <h1>BIENVENIDO A LA SECCION DE RECOMENDACIONES</h1>
             </div>
             <div className='containerMejorLibro'>
                 {datosLibrosMejores.map((x, index) => (

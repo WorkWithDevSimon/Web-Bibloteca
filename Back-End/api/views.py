@@ -3,6 +3,7 @@ from api.serializer import (
     EstadoSerializer,
     LibroSerializer,
     ReservaSerializer,
+    SerializarDatosReservasObtenrTituloAutorImg,
     SocioSerializer,
     TokenSerializer,
 )
@@ -14,8 +15,6 @@ from rest_framework import status
 from rest_framework.decorators import action, api_view, renderer_classes
 from django.http import Http404
 from secrets import token_urlsafe
-
-
 from django.http import Http404
 
 
@@ -31,6 +30,7 @@ class LibrosView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class LibrosViewId(APIView):
     def get_object(self, pk):
@@ -61,7 +61,7 @@ class LibrosViewId(APIView):
 class SociosView(APIView):
     def get(self, request):
         socios = Socio.objects.all()
-        serializer = SocioSerializer(socios, many=True)  # Corregir aquí
+        serializer = SocioSerializer(socios, many=True)
         return Response(serializer.data)
 
     def post(self, request):
@@ -119,7 +119,7 @@ class ReservasView(APIView):
 class ReservasViewId(APIView):
     def get_object(self, pk):
         try:
-            Reserva.objects.get(pk)
+            return Reserva.objects.get(pk=pk)
         except Reserva.DoesNotExist:
             return Http404
 
@@ -222,3 +222,55 @@ def libro_mas_popular(request):
         return Response(
             {"error": "No se encontraron registros"}, status=status.HTTP_400_BAD_REQUEST
         )
+
+
+@api_view(["GET"])
+def obtener_reservas_con_libros(request):
+    reservas = Reserva.objects.select_related("libro", "estado").all()
+    reservas_serializer = SerializarDatosReservasObtenrTituloAutorImg(
+        reservas, many=True
+    )
+    return Response(reservas_serializer.data)
+
+
+@api_view(["GET"])
+def LibrosDiesponiblesView(request):
+    libros = Libro.objects.filter(disponible=True)
+    serializer = LibroSerializer(libros, many=True)
+    return Response(serializer.data)
+
+
+@api_view(["GET"])
+def LibrosNoDiesponiblesView(request):
+    libros = Libro.objects.filter(disponible=False)
+    serializer = LibroSerializer(libros, many=True)
+    return Response(serializer.data)
+
+
+@api_view(["GET"])
+def libros_por_autor(request):
+    try:
+        libros = Libro.objects.all()
+        serializer = LibroSerializer(libros, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Libro.DoesNotExist:
+        raise Http404("No se encontraron libros para el autor proporcionado.")
+
+
+@api_view(["GET"])
+def socios_con_libros_reservados(request):
+    socios = Socio.objects.filter(reserva__isnull=False).distinct()
+    socios_con_libros_reservados = []
+
+    for socio in socios:
+        reservas = Reserva.objects.filter(socio=socio)
+        libros_reservados = [reserva.libro for reserva in reservas]
+        serializer_socio = SocioSerializer(socio)
+        serializer_libros = LibroSerializer(libros_reservados, many=True)
+        socio_con_libros_reservados = {
+            "socio": serializer_socio.data,
+            "libros_reservados": serializer_libros.data,
+        }
+        socios_con_libros_reservados.append(socio_con_libros_reservados)
+
+    return Response(socios_con_libros_reservados)
